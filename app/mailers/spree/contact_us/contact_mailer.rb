@@ -1,7 +1,7 @@
 class Spree::ContactUs::ContactMailer < Spree::BaseMailer
   def contact_email(contact)
     @contact = contact
-    @contact.attachments.each do |file|
+    @contact.attachments&.each do |file|
       attachments[file.filename] = File.read(file)
     end
     mail :from     => (SpreeContactUs.mailer_from || @contact.email),
